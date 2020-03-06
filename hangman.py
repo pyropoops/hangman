@@ -11,7 +11,7 @@ def loadData(filepath):
     except:
         pass
     
-    return {"wordlist": []}
+    return {"wordlist": ["croug is smart", "croug is dumb", "iphone", "mum", "ladder", "handbag"]}
 
 
 class Hangman:
