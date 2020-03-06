@@ -47,23 +47,23 @@ class Hangman:
 
             if len(letter) != 1:
                 print("You can only pick one letter at a time!")
-                return
+                break
 
-            if letter == " ":
+            elif letter == " ":
                 print("Excuse me, you're not funny with that space business!")
-                return
 
-            if letter in triedLetters:
+            elif letter in triedLetters:
                 print("You already tried that!")
-                return
 
             triedLetters.append(letter)
 
             if letter in word:
                 print("That letter was in the word!!")
                 solvedLetters.append(letter)
-
-            
+            else:
+                print("That letter was not in the word! That's very unfortunate for you! Loser.")
+        if input("Play again (y/n)?").lower() == "y":
+            self.start()
 
 hangman = Hangman("data.json")
 hangman.start()
