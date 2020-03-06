@@ -1,4 +1,5 @@
 from os import path
+
 import random
 import time
 import json
@@ -18,7 +19,7 @@ class Hangman:
     def __init__(self, dataFileLoc):
         self.dataFileLoc = dataFileLoc
         self.wordList = loadData(dataFileLoc)["wordlist"]
-
+        self.lives = 8
 
     def start(self):
         word = random.choice(self.wordList)
@@ -26,7 +27,7 @@ class Hangman:
         triedLetters = []
         isWordSolved = False
         
-        while not isWordSolved:
+        while not isWordSolved and self.lives > 0:
             solved = True
             
             obfuscatedText = ""
@@ -40,9 +41,11 @@ class Hangman:
 
             if solved: 
                 isWordSolved = True
+                break
 
             print(obfuscatedText, "\n")
 
+            print("You have", str(self.lives), "lives!")
             letter = input("Please try a letter\n")
 
             if len(letter) != 1:
@@ -60,9 +63,15 @@ class Hangman:
             if letter in word:
                 print("That letter was in the word!!")
                 solvedLetters.append(letter)
+
             else:
-                print("That letter was not in the word! That's very unfortunate for you! Loser.")
-        if input("Play again (y/n)?").lower() == "y":
+                print("That letter was not in the word! That's very unfortunate for you! Loser. You lost a life!")
+                self.lives -= 1
+        if isWordSolved:
+            print("Congratulations! You won the game and you actually didn't die! Wow!")
+        else:
+            print("You lost, you absolute disgrace.")
+        if input("Play again (y/n)? ").lower() == "y":
             self.start()
 
 hangman = Hangman("data.json")
