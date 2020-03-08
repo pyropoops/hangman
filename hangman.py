@@ -12,8 +12,7 @@ def loadData(filepath):
     except:
         pass
     
-    return {"wordlist": ["croug is smart", "croug is dumb", "iphone", "mum", "ladder", "handbag"]}
-
+    return {"wordlist": ["hello", "handbag", "ladder", "laptop", "python","fireplace", "computer", "mansion"]}
 
 class Hangman:
     def __init__(self, dataFileLoc):
@@ -57,20 +56,21 @@ class Hangman:
 
             elif letter in triedLetters:
                 print("You already tried that!")
-
-            triedLetters.append(letter)
-
-            if letter in word:
-                print("That letter was in the word!!")
-                solvedLetters.append(letter)
-
             else:
-                print("That letter was not in the word! That's very unfortunate for you! Loser. You lost a life!")
-                self.lives -= 1
+                triedLetters.append(letter)
+
+                if letter in word:
+                    print("That letter was in the word!!")
+                    solvedLetters.append(letter)
+
+                else:
+                    print("That letter was not in the word! That's very unfortunate for you! Loser. You lost a life!")
+                    self.lives -= 1
         if isWordSolved:
             print("Congratulations! You won the game and you actually didn't die! Wow!")
         else:
             print("You lost, you absolute disgrace.")
+        print("The word was:", word)
         if input("Play again (y/n)? ").lower() == "y":
             self.start()
 
